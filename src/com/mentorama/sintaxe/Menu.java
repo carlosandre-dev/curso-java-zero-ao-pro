@@ -1,3 +1,5 @@
+package com.mentorama.sintaxe;
+
 import java.util.Scanner;
 
 public class Menu {
