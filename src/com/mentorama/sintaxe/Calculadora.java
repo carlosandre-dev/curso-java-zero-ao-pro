@@ -51,11 +51,15 @@ public class Calculadora {
                 break;
             case 4:
                 System.out.print("Digite o primeiro número: ");
-                numero1 = scan.nextInt();
+                double num1 = scan.nextInt();
                 System.out.print("Digite o segundo número: ");
-                numero2 = scan.nextInt();
-                divisao = numero1 / numero2;
-                System.out.println("A divisão dos 2 números é: " + divisao);
+                double num2 = scan.nextInt();
+                if (num2 == 0) {
+                    System.out.println("Impossível dividir por zero");
+                } else {
+                    double dividir = num1 / num2;
+                    System.out.println("A divisão dos 2 números é: " + dividir);
+                }
                 break;
             default:
                 System.out.println("Opção inválida! Tente novamente.");
