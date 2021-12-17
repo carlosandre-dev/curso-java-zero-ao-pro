@@ -1,21 +1,57 @@
 package com.mentorama.handson;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+    public static void main(String[] args) throws Exception{
+        System.out.println("--- PEDIDO DE VENDAS ---");
 
-        System.out.print("Informe a descrição do produto: ");
-        String descricao = scan.nextLine();
+        int option;
 
-        System.out.print("Informe o ID do produto: ");
-        int id = scan.nextInt();
+        do {
+            System.out.println("1 - Cadastrar produto");
+            System.out.println("0 - Sair");
 
-        Produto produto = new Produto(id, descricao);
+            Scanner scan = new Scanner(System.in);
 
-        System.out.println("Produto cadastrado com sucesso!");
-        System.out.println("---- ID: " + produto.getId());
-        System.out.println("---- Descrição: " + produto.getDescricao());
+            System.out.print("Qual operação você deseja realizar?: ");
+            option = scan.nextInt();
+
+            process(option);
+        } while(option != 0);
+    }
+
+    public static void process(int option) throws Exception {
+        switch(option) {
+            case 1: {
+                Scanner scan = new Scanner(System.in);
+
+                System.out.print("Informe a descrição do produto: ");
+                String descricao = scan.nextLine();
+
+                System.out.print("Informe o ID do produto: ");
+                int id = scan.nextInt();
+
+                System.out.print("Qual preço do produto?: ");
+                double preco = scan.nextDouble();
+
+                System.out.print("Qual a data de validade do produto?: ");
+                String dataString = scan.next();
+
+                Date dataValidade = new SimpleDateFormat("dd/MM/yyyy").parse(dataString);
+
+                Produto produto = new Produto(id, descricao, preco, dataValidade);
+
+                System.out.println("Produto cadastrado com sucesso!");
+                System.out.println("---- ID: " + produto.getId());
+                System.out.println("---- Descrição: " + produto.getDescricao());
+                System.out.println("---- Preço: " + produto.getPreco());
+                System.out.println("---- Data de validade: " + produto.getDataValidade());
+                System.out.println("---------------------------------------------------");
+            }
+        }
     }
 }
