@@ -3,16 +3,21 @@ package com.mentorama.handson;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    static ProdutosDB produtosDB = new ProdutosDB();
+
     public static void main(String[] args) throws Exception{
+
         System.out.println("--- PEDIDO DE VENDAS ---");
 
         int option;
 
         do {
             System.out.println("1 - Cadastrar produto");
+            System.out.println("2 - Listar Produtos Cadastrados");
             System.out.println("0 - Sair");
 
             Scanner scan = new Scanner(System.in);
@@ -43,14 +48,25 @@ public class Main {
 
                 Date dataValidade = new SimpleDateFormat("dd/MM/yyyy").parse(dataString);
 
-                Produto produto = new Produto(id, descricao, preco, dataValidade);
+                Produto novoProduto = new Produto(id, descricao, preco, dataValidade);
 
-                System.out.println("Produto cadastrado com sucesso!");
-                System.out.println("---- ID: " + produto.getId());
-                System.out.println("---- Descrição: " + produto.getDescricao());
-                System.out.println("---- Preço: " + produto.getPreco());
-                System.out.println("---- Data de validade: " + produto.getDataValidade());
-                System.out.println("---------------------------------------------------");
+                produtosDB.addNovoProduto(novoProduto);
+
+                break;
+
+            }
+
+            case 2: {
+                List<Produto> listaDeProdutos = produtosDB.getProdutosList();
+
+                for (Produto produto : listaDeProdutos) {
+                    System.out.println("-> ID: " + produto.getId());
+                    System.out.println("-- Descrição: " + produto.getDescricao());
+                    System.out.println("-- Preço: " + produto.getPreco());
+                    System.out.println("-- Data de validade: " + produto.getDataValidade());
+                    System.out.println("---------------------------------------------------");
+                }
+                break;
             }
         }
     }

@@ -1,2 +1,5 @@
-package com.mentorama.primitivos;public class Datas {
+package com.mentorama.primitivos;
+
+public class Datas {
+
 }
